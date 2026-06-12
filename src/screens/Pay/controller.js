@@ -81,7 +81,7 @@ export function onInvoiceInput(event) {
 
 export async function onInvoiceDetected(input) {
   try {
-    const invoice = isBolt11(input) ? input : lnurlToBolt11(input);
+    const invoice = isBolt11(input) ? input : await lnurlToBolt11(input);
     await openQuoteSummary(invoice);
   } catch (err) {
     model.errorToast(err?.message ?? 'invalid or unprocessable invoice.');
