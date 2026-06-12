@@ -15,6 +15,7 @@ export const ROUTES = {
   SETTINGS_LANGUAGE: '/settings/language',
   SETTINGS_CURRENCY: '/settings/currency',
   SETTINGS_FX: '/settings/fx',
+  SETTINGS_VERSION: '/settings/version',
   SETTINGS_WALLET_DETAILS: '/settings/wallet',
   SETTINGS_WALLET_EXIT: '/settings/wallet/exit',
 };

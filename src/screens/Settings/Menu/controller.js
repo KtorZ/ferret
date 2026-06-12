@@ -16,6 +16,10 @@ export function openCurrency() {
   navigation.to(ROUTES.SETTINGS_CURRENCY);
 }
 
+export function openVersion() {
+  navigation.to(ROUTES.SETTINGS_VERSION);
+}
+
 export function openAdaptor() {
   navigation.to(ROUTES.SETTINGS_ADAPTOR);
 }

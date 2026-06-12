@@ -8,6 +8,7 @@
     openFx,
     openLanguage,
     openNetwork,
+    openVersion,
     openWalletDetails,
   } from './controller';
 
@@ -23,6 +24,7 @@
       <SettingMenuItem iconClass="fa-solid fa-network-wired" label="network" onClick={openNetwork} />
       <SettingMenuItem iconClass="fa-solid fa-language" label="language" onClick={openLanguage} />
       <SettingMenuItem iconClass="fa-solid fa-austral-sign" label="currency" onClick={openCurrency} />
+      <SettingMenuItem iconClass="fa-solid fa-code-commit" label="version" onClick={openVersion} />
     </div>
   </section>
 
