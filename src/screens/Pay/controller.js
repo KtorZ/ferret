@@ -1,6 +1,7 @@
 import { get, writable } from 'svelte/store';
 import model from '../../model';
 import { navigation, ROUTES } from '../../routing';
+import { isBolt11, lnurlToBolt11 } from '../../helpers/bolt11'
 
 const DEFAULT_PAY_FLOW_STATE = {
   invoice: '',
@@ -78,8 +79,9 @@ export function onInvoiceInput(event) {
   payFlowState.update((state) => ({ ...state, invoice: value }));
 }
 
-export async function onInvoiceDetected(invoice) {
+export async function onInvoiceDetected(input) {
   try {
+    const invoice = isBolt11(input) ? input : lnurlToBolt11(input);
     await openQuoteSummary(invoice);
   } catch (err) {
     model.errorToast(err?.message ?? 'invalid or unprocessable invoice.');

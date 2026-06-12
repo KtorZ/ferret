@@ -40,4 +40,4 @@ const mainnet = {
   ],
 };
 
-export default preprod;
+export default mainnet;
