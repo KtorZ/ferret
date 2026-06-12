@@ -6,10 +6,10 @@ import { readonly } from 'svelte/store';
 // -------------------------------------------------------------------------------------------------
 
 const DEFAULT_STATE = {
-  EUR: 0.2223,
-  USD: 0.2584,
-  CHF: 0.2013,
-  GBP: 0.1925,
+  EUR: 0.1465,
+  USD: 0.1696,
+  CHF: 0.1350,
+  GBP: 0.1265,
 };
 
 const state = store.writable(

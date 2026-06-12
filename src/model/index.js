@@ -12,7 +12,7 @@ import settings from './settings';
 import ui from './ui';
 import wallet from './wallet';
 
-// Top-level konduit instance, which is either instantiated when the user initialise the app, or 
+// Top-level konduit instance, which is either instantiated when the user initialise the app, or
 let konduit = null;
 
 // -------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ const STATE = {
   UNAVAILABLE: -1,
   // The app just started, we don't know if we have a signing key available or not yet.
   BOOTING: 0,
-  // A signing key has been found, but we haven't loaded the whole system yet. 
+  // A signing key has been found, but we haven't loaded the whole system yet.
   LOADING: 1,
   // Konduit is ready, we can let the app start.
   READY: 2,
@@ -46,7 +46,7 @@ const BACKUP_STORE_KEYS = [
   'ferret.ui.v1',
 ];
 const signingKey = store.load(STORAGE_KEY);
-if (signingKey != null) { 
+if (signingKey != null) {
   initKonduit(signingKey);
 } else {
   state.set(STATE.UNAVAILABLE);
@@ -63,7 +63,7 @@ async function initKonduit(signingKey) {
     const networkId = config.networkName === 'mainnet' ? NetworkId.mainnet() : NetworkId.testnet();
     const scriptDeploymentAddress = ShelleyAddress.tryParse(config.scriptDeploymentAddress);
 
-    
+
     // Instantiate Konduit runtime
     if (signingKey == null) {
       signingKey = new SigningKey();
@@ -105,7 +105,7 @@ async function initKonduit(signingKey) {
     // Initialize the Channel, if any.
     channel.init(konduit);
 
-    // Initial refresh the application state, we don't use `refresh` directly here to ensure we only 
+    // Initial refresh the application state, we don't use `refresh` directly here to ensure we only
     // only change the app to ready once we have at least performed the initial refresh.
     await Promise.all([
       wallet.refresh(konduit),
@@ -147,13 +147,15 @@ async function refresh() {
 
   state.set(STATE.BUSY);
 
+  fx.reset();
+
   try {
-    const wasOpening = get(channel.state).step === channel.STEP.OPENING; 
+    const wasOpening = get(channel.state).step === channel.STEP.OPENING;
     await Promise.all([
       wallet.refresh(konduit),
       channel.refresh(konduit),
     ]);
-    const hasOpened = get(channel.state).step === channel.STEP.OPENED; 
+    const hasOpened = get(channel.state).step === channel.STEP.OPENED;
     if (wasOpening && hasOpened) {
       ui.setDisplayWallet(TX_REALM.L2);
     }
@@ -217,7 +219,7 @@ export default {
   channel: channel.state,
   openChannel(tag, amount) { return channel.open(konduit, tag, amount) },
   addToChannel(amount) { return channel.add(konduit, amount) },
-  async pay(invoice, quote) { 
+  async pay(invoice, quote) {
     state.set(STATE.BUSY);
     try {
       return await channel.pay(konduit, invoice, quote);
@@ -239,9 +241,9 @@ export default {
   settings: settings.state,
   configureAdaptor: settings.setAdaptor,
   configureConnector: settings.setConnector,
-  configureCurrency: settings.setCurrency, 
+  configureCurrency: settings.setCurrency,
   configureFxProvider: settings.setFxProvider,
-  configureLocale: settings.setLocale, 
+  configureLocale: settings.setLocale,
   configureNetwork: settings.setNetwork,
 
   // UI
