@@ -55,10 +55,12 @@ export function isLightningAddress(input) {
  * @returns {boolean} True if it looks like a Bolt11 invoice
  */
 export function isBolt11(input) {
-  return input.startsWith("lnbc1")  // Mainnet
-    || input.startsWith("lntb1") // Testnet
-    || input.startsWith("lntbs1") // Signet
-    || input.startsWith("lnbcrt"); // Regtest
+  const prefix = input.toLowerCase().slice(0, 6);
+
+  return prefix.startsWith("lnbc")  // Mainnet
+    || prefix.startsWith("lntb")    // Testnet
+    || prefix.startsWith("lntbs")   // Signet
+    || prefix.startsWith("lnbcrt"); // Regtest
 }
 
 /**
